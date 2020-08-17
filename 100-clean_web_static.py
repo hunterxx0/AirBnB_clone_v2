@@ -9,6 +9,7 @@ env.hosts = ['35.231.7.140', '35.227.72.212']
 
 
 def do_clean(number=0):
+    """ deletes out-of-date archives """
     if int(number) == 0:
         number = 1
     else:
