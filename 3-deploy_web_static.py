@@ -36,6 +36,7 @@ def do_deploy(archive_path):
     run('ln -s {} /data/web_static/current'.format(src))
     return True
 
+
 def deploy():
     """ creates and distributes an archive to your web servers """
     full = do_pack()
