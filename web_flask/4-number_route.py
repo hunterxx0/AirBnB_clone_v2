@@ -15,16 +15,19 @@ def hbnb():
     """ Displays "HBNB" """
     return 'HBNB'
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """ Displays "C" followed by text """
     return ('C ' + text.replace('_', ' '))
+
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def py_text(text='is cool'):
     """ Displays "Python" followed by text """
     return ('Python ' + text.replace('_', ' '))
+
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def int_num(n):

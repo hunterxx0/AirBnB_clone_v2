@@ -15,6 +15,7 @@ def hbnb():
     """ Displays "HBNB" """
     return 'HBNB'
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """ Displays "HBNB" """
