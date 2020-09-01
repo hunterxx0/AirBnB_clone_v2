@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Starts a Flask web application """
 from flask import Flask, render_template
+from models import storage
 from models import *
 app = Flask(__name__)
 
@@ -8,7 +9,8 @@ app = Flask(__name__)
 @app.route('/states_list', strict_slashes=False)
 def stt_list():
     """ Displays states """
-    stt = storage.all('State')
+    stt = sorted([ st for st in storage.all('State').values()],
+                 key=lambda x: x.name)
     return (render_template('7-states_list.html', stt=stt))
 
 
