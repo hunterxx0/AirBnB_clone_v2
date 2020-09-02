@@ -31,34 +31,31 @@ class DBStorage:
                                       .format(getenv('HBNB_MYSQL_USER'),
                                               getenv('HBNB_MYSQL_PWD'),
                                               getenv('HBNB_MYSQL_HOST'),
-                                              getenv('HBNB_MYSQL_DB')),
-                                      pool_pre_ping=True)
+                                              getenv('HBNB_MYSQL_DB')))
 
         if (getenv('HBNB_ENV') == 'test'):
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """ yo """
+        """ yall """
 
         res = {}
         if not cls:
             for c in self.cl.keys():
                 q = self.__session.query(self.cl[c]).all()
-                if q:
-                    for x in q:
-                        res[c + '.' + x.id] = x
+                for x in q:
+                    res[c.__class__.__name__ + '.' + x.id] = x
 
         else:
+            if type(cls) != str:
+                cls = cls__class__.__name__
             q = self.__session.query(self.cl[cls]).all()
-            if q:
-                for x in q:
-                    res[cls + '.' + x.id] = x
-
+            for x in q:
+                res[cls + '.' + x.id] = x
         return res
 
     def new(self, obj):
         """ new """
-
         self.__session.add(obj)
 
     def save(self):
@@ -74,10 +71,9 @@ class DBStorage:
 
     def reload(self):
         """ reload """
-
         Base.metadata.create_all(self.__engine)
         sf = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        self.__session = scoped_session(sf)
+        self.__session = scoped_session(sf)()
 
     def close(self):
         """ Call remove() method on the private session attribute """
