@@ -4,6 +4,7 @@ from flask import Flask, render_template
 from models import storage
 app = Flask(__name__)
 
+
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<st_>', strict_slashes=False)
 def stt_id(st_=None):
