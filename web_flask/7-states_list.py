@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/states_list', strict_slashes=False)
 def stt_list():
     """ Displays states """
-    stt = [ st for st in storage.all('State').values()]
+    stt = [st for st in storage.all('State').values()]
     stt = sorted(stt, key=lambda x: x.name)
     return (render_template('7-states_list.html', stt=stt))
 
