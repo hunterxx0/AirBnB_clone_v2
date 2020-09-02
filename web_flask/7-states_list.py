@@ -9,12 +9,12 @@ app = Flask(__name__)
 def stt_list():
     """ Displays states """
     stt = [st for st in storage.all('State').values()]
-    stt = sorted(stt, key=lambda x: x.name)
+    stt = sorted(stt, key=lambda st: st.name)
     return (render_template('7-states_list.html', stt=stt))
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(exception):
     """ Close """
     storage.close()
 

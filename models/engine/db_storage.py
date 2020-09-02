@@ -27,11 +27,12 @@ class DBStorage:
 
     def __init__(self):
 
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
-                                      .format(getenv('HBNB_MYSQL_USER'),
-                                              getenv('HBNB_MYSQL_PWD'),
-                                              getenv('HBNB_MYSQL_HOST'),
-                                              getenv('HBNB_MYSQL_DB')))
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
+                                      format(getenv("HBNB_MYSQL_USER"),
+                                             getenv("HBNB_MYSQL_PWD"),
+                                             getenv("HBNB_MYSQL_HOST"),
+                                             getenv("HBNB_MYSQL_DB"),
+                                             pool_pre_ping=True))
 
         if (getenv('HBNB_ENV') == 'test'):
             Base.metadata.drop_all(self.__engine)
@@ -44,7 +45,7 @@ class DBStorage:
             for c in self.cl.keys():
                 q = self.__session.query(self.cl[c]).all()
                 for x in q:
-                    res[c.__class__.__name__ + '.' + x.id] = x
+                    res[x.__class__.__name__ + '.' + x.id] = x
 
         else:
             if type(cls) != str:
