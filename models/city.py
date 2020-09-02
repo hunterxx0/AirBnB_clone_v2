@@ -4,7 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-
+from os import getenv
 
 class City(BaseModel, Base):
     """ The city class, contains state ID and name """
